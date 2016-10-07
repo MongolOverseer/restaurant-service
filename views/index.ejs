@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Restaurant Search Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.css" media="screen" title="no title" /> -->
+   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+   <link rel="stylesheet" href="/styles.css" media="screen" />
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- Search bar  -->
+    <form action="/restaurants" method="POST" class="form-search">
+      <h3>Search for restaurants</h3>
+      <input type="text" name="search" placeholder="Search here">
+      <br>
+      <button type="submit">Search</button>
+    </form>
+    <!-- Results -->
+    <h4>Results:</h4>
+    <div class="results-container">
+      <ul class="result-restaurants">
+        <% for(var i=0; i<restaurants.length; i++) {%>
+          <li class="restaurant">
+            <span class="restaurant-title"><%= restaurants[i].name %></span><br>
+            <span class="details">Borough: <%= restaurants[i].borough %></span><br>
+            <span class="details">Cuisine: <%= restaurants[i].cuisine %></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
