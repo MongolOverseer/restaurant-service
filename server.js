@@ -28,6 +28,7 @@ MongoClient.connect(url, (err, database) => {
 })
 
 app.post('/restaurants', (req, res) => {
+  console.log(req.body.query);
   db.collection('restaurants').find({$text: {$search: req.body.query}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}}).toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
