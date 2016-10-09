@@ -67,3 +67,6 @@ jspm_packages
 
 # Output of 'npm pack'
 *.tgz
+
+# mongoDB -- added here because of problems when checkouting branches
+db
