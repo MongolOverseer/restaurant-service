@@ -12,20 +12,32 @@
 </head>
 
 <body>
-  <h1>test test</h1>
-  <h1>test test</h1>
-  <h1>test test</h1>
-  <h1>test test</h1>
   <div class="container">
     <!-- Search bar  -->
+    <h3>Search restaurants</h3>
     <form action="/restaurants" method="POST" class="form-search">
-      <h3>Search restaurants</h3>
       <input type="text" name="search" placeholder="Search here">
       <br>
       <button type="submit">Search</button>
     </form>
     <!-- Drop down filters -->
-
+    <h3>Filter restaurants</h3>
+    <form class="" action="/restaurantsfiltered" method="POST">
+      <h4>Select cuisine</h4>
+        <select class="" name="">
+          <option value="option">---</option>
+          <% for(var i=0; i<restaurants.length; i++) {%>
+            <option value="option"><%= restaurants[i].cuisine %></option>
+          <% } %>
+        </select>
+      <h4>Select borough</h4>
+        <select class="" name="">
+          <option value="option">---</option>
+          <% for(var i=0; i<restaurants.length; i++) {%>
+            <option value="option"><%= restaurants[i].borough %></option>
+          <% } %>
+        </select>
+    </form>
   </div>
 </body>
 

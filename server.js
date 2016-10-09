@@ -14,11 +14,11 @@ app.use(express.static('css'));
 
 // Render index.ejs and fetch boroughs and cuisines for dropdown filter
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+  // res.sendFile(__dirname + '/index.html')
   db.collection('restaurants').find({}, {cuisine: 1, borough: 1}).toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
-    res.render('index.ejs');
+    res.render('index.ejs', {restaurants: result});
   })
 })
 
@@ -33,11 +33,11 @@ MongoClient.connect(url, (err, database) => {
   })
 })
 
-app.post('/restaurants', (req, res) => {
+app.post('/restaurantssearched', (req, res) => {
   db.collection('restaurants').find({$text: {$search: req.body.query}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}}).toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
-    res.render('index.ejs', {restaurants: result})
+    res.render('resultsSearched.ejs', {restaurants: result})
   })
 })
 
@@ -45,6 +45,6 @@ app.post('/restaurantsfiltered', (req, res) => {
   db.collection('restaurants').find({}, {cuisine: 1, borough: 1}).toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
-    res.render('index.ejs', {boroughsAndCuisines: result})
+    res.render('resultsFiltered.ejs', {boroughsAndCuisines: result})
   })
 })
