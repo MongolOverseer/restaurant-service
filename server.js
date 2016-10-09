@@ -46,7 +46,9 @@ app.post('/restaurantsfiltered', (req, res) => {
   console.log(req.body.borough);
   db.collection('restaurants').find(req.body).toArray((err, result) => {
     if (err) return console.log(err)
-    if (!result) return console.log('no results found');
+    if (result.length < 1) {
+      console.log('No results found.');
+    }
     // renders index.ejs
     res.render('resultsFiltered.ejs', {restaurantsfiltered: result})
   })
