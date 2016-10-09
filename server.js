@@ -37,14 +37,17 @@ app.post('/restaurantssearched', (req, res) => {
   db.collection('restaurants').find({$text: {$search: req.body.query}}, {score: {$meta: "textScore"}}).sort({score:{$meta:"textScore"}}).toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
-    res.render('resultsSearched.ejs', {restaurants: result})
+    res.render('resultsSearched.ejs', {restaurantssearched: result})
   })
 })
 
 app.post('/restaurantsfiltered', (req, res) => {
-  db.collection('restaurants').find({}, {cuisine: 1, borough: 1}).toArray((err, result) => {
+  console.log(req.body.cuisine);
+  console.log(req.body.borough);
+  db.collection('restaurants').find(req.body).toArray((err, result) => {
     if (err) return console.log(err)
+    if (!result) return console.log('no results found');
     // renders index.ejs
-    res.render('resultsFiltered.ejs', {boroughsAndCuisines: result})
+    res.render('resultsFiltered.ejs', {restaurantsfiltered: result})
   })
 })
