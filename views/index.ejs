@@ -14,25 +14,35 @@
 <body>
   <div class="container">
     <!-- Search bar  -->
-    <form action="/restaurants" method="POST" class="form-search">
-      <h3>Search for restaurants</h3>
-      <input type="text" name="search" placeholder="Search here">
-      <br>
+    <h3>Search restaurants</h3>
+    <form action="/restaurantssearched" method="POST" class="form-search">
+      <input type="text" name="query" placeholder="Search here">
+      <br><br>
       <button type="submit">Search</button>
     </form>
-    <!-- Results -->
-    <h4>Results:</h4>
-    <div class="results-container">
-      <ul class="result-restaurants">
-        <% for(var i=0; i<restaurants.length; i++) {%>
-          <li class="restaurant">
-            <span class="restaurant-title"><%= restaurants[i].name %></span><br>
-            <span class="details">Borough: <%= restaurants[i].borough %></span><br>
-            <span class="details">Cuisine: <%= restaurants[i].cuisine %></span>
-          </li>
-        <% } %>
-      </ul>
-    </div>
+    <hr>
+    <h4>OR</h4>
+    <hr>
+    <!-- Drop down filters -->
+    <h3>Filter restaurants</h3>
+    <form class="" action="/restaurantsfiltered" method="POST">
+      <h4>Select cuisine</h4>
+        <select name="cuisine">
+          <option value="option">---</option>
+          <% for(var i=0; i<restaurants.length; i++) {%>
+            <option><%= restaurants[i].cuisine %></option>
+          <% } %>
+        </select>
+      <h4>Select borough</h4>
+        <select name="borough">
+          <option value="option">---</option>
+          <% for(var i=0; i<restaurants.length; i++) {%>
+            <option><%= restaurants[i].borough %></option>
+          <% } %>
+        </select>
+        <br><br>
+        <button type="submit">Filter</button>
+    </form>
   </div>
 </body>
 
